@@ -1,23 +1,12 @@
-// const express = require("express");
-// const cors = require("cors");
-// const path = require("path");
-// require("dotenv").config();
-// const app = express();
-// app.use(
-//   cors({
-//     origin:"*",
-//     credentials: true,
-//   })
-// );
-
-// app.use(express.json());
-// app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-// const routes = require("./src/routes");
-// app.use("/api", routes);
-// module.exports = app;
-
 const express = require("express");
 const cors = require("cors");
+
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://192.168.0.154:3000",
+  "https://moderndev-frontend.vercel.app"
+];
+
 const path = require("path");
 
 const app = express();

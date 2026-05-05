@@ -21,33 +21,69 @@
 
 // start();
 
+// require("dotenv").config();
+// const app = require("./app");
+// const sequelize = require("./src/config/database");
+
+// const PORT = process.env.PORT || 5000;
+
+// const startServer = async () => {
+//   try {
+//     // ✅ Test DB connection
+//     await sequelize.authenticate();
+//     console.log("✅ Database connected");
+
+//     // ⚠️ Sync only in development
+//     if (process.env.NODE_ENV !== "production" && process.env.DB_SYNC === "true") {
+//       await sequelize.sync({ alter: true });
+//       console.log("✅ DB synced");
+//     }
+
+//     // ✅ Start server
+//     app.listen(PORT, () => {
+//       console.log(`🚀 Server running on port ${PORT}`);
+//     });
+
+//   } catch (error) {
+//     console.error("❌ Failed to start server:", error);
+//     process.exit(1); // stop app if DB fails
+//   }
+// };
+
+// startServer();
+
 require("dotenv").config();
-const app = require("./app");
-const sequelize = require("./src/config/database");
 
-const PORT = process.env.PORT || 5000;
+console.log("🚀 Starting server...");
 
-const startServer = async () => {
-  try {
-    // ✅ Test DB connection
-    await sequelize.authenticate();
-    console.log("✅ Database connected");
+try {
+  const app = require("./app");
+  const sequelize = require("./src/config/database");
 
-    // ⚠️ Sync only in development
-    if (process.env.NODE_ENV !== "production" && process.env.DB_SYNC === "true") {
-      await sequelize.sync({ alter: true });
-      console.log("✅ DB synced");
+  const start = async () => {
+    try {
+      console.log("ENV CHECK:");
+      console.log("DB_HOST:", process.env.DB_HOST);
+      console.log("DB_USER:", process.env.DB_USER);
+      console.log("DB_NAME:", process.env.DB_NAME);
+      console.log("DB_PORT:", process.env.DB_PORT);
+
+      await sequelize.authenticate();
+      console.log("✅ Database connected");
+
+      const PORT = process.env.PORT || 5000;
+
+      app.listen(PORT, () => {
+        console.log(`🚀 Server running on port ${PORT}`);
+      });
+
+    } catch (err) {
+      console.error("❌ Startup error:", err);
     }
+  };
 
-    // ✅ Start server
-    app.listen(PORT, () => {
-      console.log(`🚀 Server running on port ${PORT}`);
-    });
+  start();
 
-  } catch (error) {
-    console.error("❌ Failed to start server:", error);
-    process.exit(1); // stop app if DB fails
-  }
-};
-
-startServer();
+} catch (err) {
+  console.error("❌ CRASH BEFORE START:", err);
+}
