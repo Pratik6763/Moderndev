@@ -61,26 +61,33 @@ try {
   const sequelize = require("./src/config/database");
 
   const start = async () => {
-    try {
-      console.log("ENV CHECK:");
-      console.log("DB_HOST:", process.env.DB_HOST);
-      console.log("DB_USER:", process.env.DB_USER);
-      console.log("DB_NAME:", process.env.DB_NAME);
-      console.log("DB_PORT:", process.env.DB_PORT);
+  try {
+    console.log("ENV CHECK:");
+    console.log("DB_HOST:", process.env.DB_HOST);
+    console.log("DB_USER:", process.env.DB_USER);
+    console.log("DB_NAME:", process.env.DB_NAME);
+    console.log("DB_PORT:", process.env.DB_PORT);
 
-      await sequelize.authenticate();
-      console.log("✅ Database connected");
+    await sequelize.authenticate();
+    console.log("✅ Database connected");
 
-      const PORT = process.env.PORT || 5000;
+    // 🔥 ADD THIS (IMPORTANT)
+    await sequelize.sync({ alter: true });
+    console.log("✅ DB synced");
 
-      app.listen(PORT, () => {
-        console.log(`🚀 Server running on port ${PORT}`);
-      });
+    const tables = await sequelize.getQueryInterface().showAllTables();
+    console.log("Tables in DB:", tables);
 
-    } catch (err) {
-      console.error("❌ Startup error:", err);
-    }
-  };
+    const PORT = process.env.PORT || 5000;
+
+    app.listen(PORT, () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+    });
+
+  } catch (err) {
+    console.error("❌ Startup error:", err);
+  }
+};
 
   start();
 

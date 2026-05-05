@@ -2,16 +2,15 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 
-const app = express(); // ✅ FIRST define app
+const app = express(); 
 
-// ✅ Allowed origins
+
 const allowedOrigins = [
   "http://localhost:3000",
   "http://192.168.0.154:3000",
   "https://moderndev-frontend.vercel.app",
 ];
 
-// ✅ CORS (correct)
 app.use(
   cors({
     origin: function (origin, callback) {
