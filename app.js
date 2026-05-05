@@ -4,9 +4,24 @@ const cors = require("cors");
 const allowedOrigins = [
   "http://localhost:3000",
   "http://192.168.0.154:3000",
-  "https://moderndev-frontend.vercel.app"
+  "https://moderndev-frontend.vercel.app",
 ];
 
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // allow requests with no origin (like Postman)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS: " + origin));
+      }
+    },
+    credentials: true,
+  }),
+);
 const path = require("path");
 
 const app = express();
@@ -15,13 +30,6 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ✅ CORS (restrict in production)
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL || "*",
-    credentials: true,
-  })
-);
 
 // ✅ Static files (uploads)
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
