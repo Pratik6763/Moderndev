@@ -1,44 +1,38 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../config/database");
+const household = require("./householdsmodel");
+const user = require("./Users");
 
-const Audience = sequelize.define(
-  "Audience",
+const Feedback = sequelize.define(
+  "Feedback",
   {
-    audience: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    users: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    userId: {
+    household: {
       type: DataTypes.INTEGER,
-      allowNull: true,
+      allowNull: false,
       references: {
-        model: "users",
+        model: household,
         key: "id",
       },
     },
-    role: {
+    user: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: user,
+        key: "id",
+      },
+    },
+    appointmentNumber: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    state: {
-      type: DataTypes.STRING,
+    rating: {
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
-    district: {
+    message: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
-    gender: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    ageRange: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     createdAt: {
       type: DataTypes.DATE,
@@ -50,9 +44,9 @@ const Audience = sequelize.define(
     },
   },
   {
-    tableName: "audience",
+    tableName: "feedback",
     timestamps: true,
   }
 );
 
-module.exports = Audience;
+module.exports = Feedback;

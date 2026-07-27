@@ -3,7 +3,7 @@ const { Tickets, User } = require("../models");
 const assignedUserInclude = {
   model: User,
   as: "assignedUser",
-  attributes: ["id", "username", "email", "mobile"],
+  attributes: ["id", "username", "email", "mobile", "createdAt"],
 };
 
 const formatTicket = (ticket) => {

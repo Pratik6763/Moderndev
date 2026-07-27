@@ -3,7 +3,7 @@ const { Audience, User } = require("../models");
 const mappedUserInclude = {
   model: User,
   as: "mappedUser",
-  attributes: ["id", "username", "email", "gender", "mobile"],
+  attributes: ["id", "username", "email", "gender", "mobile", "createdAt"],
 };
 
 const formatAudience = (audience) => {

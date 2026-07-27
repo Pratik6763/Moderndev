@@ -23,11 +23,19 @@ const household = sequelize.define(
     maxallowedpoints:{
         type:DataTypes.STRING,
         allowNull: false,
+    },
+    createdAt:{
+        type:DataTypes.DATE,
+        allowNull: true,
+    },
+    updatedAt:{
+        type:DataTypes.DATE,
+        allowNull: true,
     }
   } ,
   {
     tableName:"household",
-    timestamps: false, 
+    timestamps: true, 
   }
 
 )

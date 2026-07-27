@@ -13,7 +13,7 @@ const getuserService = async (
   }
   const { count, rows } = await User.findAndCountAll({
     where,
-    attributes: ["id", "username", "email", "gender", "mobile"],
+    attributes: ["id", "username", "email", "gender", "mobile", "createdAt"],
     limit,
     offset,
     order: [["id", "DESC"]],

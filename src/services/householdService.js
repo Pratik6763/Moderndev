@@ -1,6 +1,5 @@
 const Household = require("../models/householdsmodel");
 
-
 const createHousehold = async (data) => {
   return await Household.create(data);
 };

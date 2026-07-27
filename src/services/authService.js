@@ -2,7 +2,6 @@ const User = require("../models/Users");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-// SIGNUP SERVICE
 const signupService = async (data) => {
   const { username, email, gender, password } = data;
 
@@ -26,9 +25,6 @@ const signupService = async (data) => {
   return user;
 };
 
-
-
-// SIGNIN SERVICE
 const signinService = async (data) => {
   const { email, password } = data;
 

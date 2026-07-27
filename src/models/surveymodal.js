@@ -22,11 +22,19 @@ const Survey = sequelize.define(
     audience: {
       type: DataTypes.STRING,
       field: "audienece",
-    },   
+    },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
   },
   {
     tableName: "survey",
-    timestamps: false,
+    timestamps: true,
   }
 );
 

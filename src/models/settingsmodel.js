@@ -20,10 +20,18 @@ const Settings = sequelize.define(
         key: "id",
       },
     },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
   },
   {
     tableName: "settings",
-    timestamps: false,
+    timestamps: true,
   }
 );
 

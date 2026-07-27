@@ -25,10 +25,18 @@ const lms = sequelize.define(
       allowNull: false,
       defaultValue: true,
     },
+    createdAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    updatedAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
   },
   {
     tableName: "lms",
-    timestamps: false,
+    timestamps: true,
   },
 );
 
